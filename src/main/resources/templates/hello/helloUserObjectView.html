@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hello</h1>
+<p th:text="${user.firstname}"></p>
+<p th:if="${user.getLastName != null}" th:text="${user.getLastname()}"></p>
+<p th:text="${countries}"></p>
+<div style="border: red 1px solid ">
+<div th:each="country : ${countries}">
+    <span th:text="${country.name}"></span> : <span th:text="${country.area}"></span>
+</div>
+
+</div>
+</body>
+</html>

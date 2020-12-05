@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Miniblog - post</title>
+</head>
+<body>
+<h1><span th:text="${postDetails.title}"></span></h1>
+<p style="color: gray">Added: <span th:text="${postDetails.created}"></span></p>
+<p><span th:text="${postDetails.postContent}"></span></p>
+
+<br>
+<h2>Add comment:</h2>
+<form th:action="@{/posts/} + ${postId} + ${/comment/add}" method="post">
+    <label>Nickname:</label>
+    <input type="text" name="nickname" placeholder="Enter your nickname...">
+    <label>Comment:</label>
+    <input type="text" name="commentContent" placeholder="Enter comment...">
+    <input type="submit" value="Add comment">
+</form>
+<br>
+<h2>Comments:</h2>
+<table>
+    <tr th:each="comment : ${comments}">
+        <h2><span th:text="${comment.nickname}"></span></h2>
+        <p><span th:text="${comment.created}"></span></p>
+        <p><span th:text="${comment.commentContent}"></span></p>
+    </tr>
+</table>
+
+
+</body>
+</html>

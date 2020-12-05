@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1> Podaj swoje dane:</h1>
+<form action="/hello-user-form-submit-2" th:method="get">
+    <label>Imię:</label>
+    <input th:type="text"
+           th:name="firstname"
+           placeholder="Podaj swoje imię..."
+           th:value="${user.firstname}">
+    <label>Nazwisko:</label>
+    <input th:type="text"
+           name="lastname"
+           placeholder="Podaj swoje nazwisko..."
+           th:value="${user.lastname}">
+    <input type="submit" value="Przekaż dane">
+</form>
+</body>
+</html>

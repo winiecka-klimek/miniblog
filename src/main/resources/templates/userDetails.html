@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Miniblog - user data</title>
+</head>
+<body>
+<h1>User info</h1>
+<p> Id: <span th:text="${userDetails.id}" ></span></p>
+<p> Email: <span th:text="${userDetails.email}" ></span></p>
+<p> Nickname: <span th:text="${userDetails.nickname}" ></span></p>
+<p> Registration date: <span th:text="${userDetails.created}" ></span></p>
+</body>
+</html>

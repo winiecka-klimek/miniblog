@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Miniblog - users list</title>
+</head>
+<body>
+
+<h1>
+    Users registered in our blog
+</h1>
+<form th:action="@{/users-by-email}" method="get">
+    <input type="text" name="email" placeholder="Search by email fragment...">
+    <input type="submit" value="Search">
+</form>
+
+<table>
+    <tr th:each="user : ${users}">
+        <td><a th:text="${user.id}" th:href="@{/users/} + ${user.id}"></a></td>
+        <td th:text="${user.email}"> </td>
+        <td th:text="${user.nickname}"></td>
+    </tr>
+</table>
+</body>
+</html>

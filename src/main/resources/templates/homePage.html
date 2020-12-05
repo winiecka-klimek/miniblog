@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Miniblog</title>
+</head>
+<body>
+<h1> Welcome to Miniblog</h1>
+<h2>User logged: <span th:text="${userLogged}"></span></h2>
+<div th:if="${userLogged && userInfo != null}">
+    Nick: <span th:text="${userInfo.nickname}"></span>
+    <br>
+    Email: <span th:text="${userInfo.email}"></span>
+</div>
+<div>
+    <p>Menu</p>
+    <ul>
+        <li><a th:href="@{/login}">Login</a></li>
+        <li><a th:href="@{/register}">Register</a></li>
+        <li><a th:href="@{/users}">Our registered users</a></li>
+        <li><a th:href="@{/logout-user}">Logout</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
