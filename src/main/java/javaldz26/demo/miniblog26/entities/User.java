@@ -2,6 +2,8 @@ package javaldz26.demo.miniblog26.entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -15,6 +17,19 @@ public class User {
    private String nickname;
    private String password;
    private LocalDateTime created = LocalDateTime.now();
+
+   @ManyToMany
+   @JoinTable(name = "users_roles")
+   private Set<Role> roles = new HashSet<>();
+   //nie powinniśmy wyciągać tego seta getem,  tylko metodą
+
+    public  void addRole (Role role) {
+        roles.add(role);
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
     public LocalDateTime getCreated() {return created;}
 

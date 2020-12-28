@@ -5,10 +5,10 @@
     <title>Miniblog - login page</title>
 </head>
 <body>
-<form th:action="@{/login-submit-data}" method="post">
-    <input type="text" name="username" placeholder="Enter your email...">
+<form th:action="@{/login-by-spring-submit}" method="post">
+    <input type="text" name="loginUserName" placeholder="Enter your email...">
     <br>
-    <input type="password" name="password" placeholder="Enter your password...">
+    <input type="password" name="hidenPassword" placeholder="Enter your password...">
     <input type="submit" value="Login">
 </form>
 </body>

@@ -10,8 +10,10 @@ public class UserDoesntExistException extends RuntimeException{
     public String getUsername() {
         return username;
     }
+
     @Override
     public String getMessage() {
-        return String.format("User identified by %s couldn't be found");
+        return String.format("User identified by %s couldn't be found", username);
     }
+
 }

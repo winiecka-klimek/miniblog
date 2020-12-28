@@ -4,26 +4,35 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class PostShortInfoDto {
-
+    private Long id;
     private String title;
-    private String postContent;
+    private String postAbstract;
     private LocalDateTime created;
 
-    public PostShortInfoDto(String title, LocalDateTime created, String postContent ) {
+    public PostShortInfoDto(Long id, String title, LocalDateTime created, String postAbstract ) {
+        this.id = id;
         this.title = title;
         this.created = created;
-        this.postContent = postContent;
+        this.postAbstract = postAbstract;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getPostContent() {
-        return postContent.substring(0, 51);
-    }
+//    public String getPostContent() {
+//        return postContent.substring(0, 51);
+//    }
 
     public LocalDateTime getCreated() {
         return created;
+    }
+
+    public String getPostAbstract() {
+        return postAbstract;
     }
 }

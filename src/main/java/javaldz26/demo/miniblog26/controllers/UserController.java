@@ -3,6 +3,7 @@ package javaldz26.demo.miniblog26.controllers;
 import javaldz26.demo.miniblog26.dtos.RegisteredUserDto;
 import javaldz26.demo.miniblog26.dtos.UserDetailsDto;
 import javaldz26.demo.miniblog26.dtos.UserShortInfoDto;
+import javaldz26.demo.miniblog26.exceptions.UserDoesntExistException;
 import javaldz26.demo.miniblog26.services.LoginService;
 import javaldz26.demo.miniblog26.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -58,7 +59,8 @@ public class UserController {
     @GetMapping("/users/{userId}")
     public String showUserDetailsPage(@PathVariable Long userId, Model model) {
 //
-        UserDetailsDto userDetails = userService.getUserDetails(userId);
+        UserDetailsDto userDetails = userService.getUserDetails(userId)
+                .orElseThrow(()-> new UserDoesntExistException(userId.toString()));
         model.addAttribute("userDetails", userDetails);
 
         return "userDetails";

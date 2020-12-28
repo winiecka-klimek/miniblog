@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1> Welcome to Miniblog</h1>
+<h2>User logged as: <span th:text="${loggedAs}"></span></h2>
 <h2>User logged: <span th:text="${userLogged}"></span></h2>
 <div th:if="${userLogged && userInfo != null}">
     Nick: <span th:text="${userInfo.nickname}"></span>
@@ -18,6 +19,8 @@
         <li><a th:href="@{/login}">Login</a></li>
         <li><a th:href="@{/register}">Register</a></li>
         <li><a th:href="@{/users}">Our registered users</a></li>
+        <li><a th:href="@{/posts/add}">Add new post</a></li>
+        <li><a th:href="@{/posts}">Posts on our blog</a></li>
         <li><a th:href="@{/logout-user}">Logout</a></li>
     </ul>
 </div>

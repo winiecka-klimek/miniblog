@@ -7,6 +7,8 @@ import javaldz26.demo.miniblog26.dtos.UserDetailsDto;
 import javaldz26.demo.miniblog26.dtos.UserShortInfoDto;
 import javaldz26.demo.miniblog26.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,19 +21,21 @@ public class UserService {
 
     private final UserDao userDao;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    
-@Autowired
-    public UserService(UserDao userDao, UserRepository userRepository) {
+
+    @Autowired
+    public UserService(UserDao userDao, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public RegisteredUserDto registeredUser(String email, String nickname, String  password) {
         final User user = new User();
         user.setEmail(email);
         user.setNickname(nickname);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
 
 //        userDao.save(user);
 
@@ -72,10 +76,16 @@ public class UserService {
 //           .map(user -> new UserDetailsDto(user.getId(), user.getEmail(), user.getNickname(), user.getCreated()));
 //    }
 
-    public UserDetailsDto getUserDetails(Long userId) {
+//    public UserDetailsDto getUserDetails(Long userId) {
+//        return userRepository.findById(userId)
+//                .map(user -> new UserDetailsDto(user.getId(), user.getEmail(), user.getNickname(), user.getCreated()))
+//                .orElseThrow(() -> new IllegalArgumentException("User doesn't exist for given id: " + userId));
+//    }
+
+    public Optional<UserDetailsDto> getUserDetails(Long userId) {
         return userRepository.findById(userId)
-                .map(user -> new UserDetailsDto(user.getId(), user.getEmail(), user.getNickname(), user.getCreated()))
-                .orElseThrow(() -> new IllegalArgumentException("User doesn't exist for given id: " + userId));
+                .map(user -> new UserDetailsDto(user.getId(), user.getEmail(), user.getNickname(), user.getCreated()));
+//
     }
 
     public List<UserShortInfoDto> findByEmailContaining(String email) {

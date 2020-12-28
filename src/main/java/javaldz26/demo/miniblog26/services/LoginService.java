@@ -27,7 +27,7 @@ public class LoginService {
 
     private  UUID uuid;
 
-    private boolean logged = false;
+    private boolean logged;
 
     public boolean isLogged() {
         return logged;
@@ -40,6 +40,7 @@ public class LoginService {
     @Autowired
     public LoginService(UserRepository userRepository) {
         uuid = UUID.randomUUID();
+        logged = false;
         log.info("LoginService creating instance: " + uuid.toString());
         this.userRepository = userRepository;
     }
@@ -71,7 +72,7 @@ public class LoginService {
                 .orElseThrow(() -> new UserDoesntExistException(username));
 
         if (!user.getPassword().equals(password)) {
-            throw new InvalidCredentialsException();
+            throw new InvalidCredentialsException("invalid");
         }
 
         this.userSessionDto = new UserSessionDto(user.getEmail(), user.getNickname());
@@ -79,10 +80,15 @@ public class LoginService {
         this.logged = true;
     }
 
-
     public void logout() {
         this.logged = false;
         this.userSessionDto = null;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        log.info("LoginService afterPropertiesSet: {}", uuid.toString());
+
     }
 
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Miniblog - posts</title>
+</head>
+<body>
+<h1>Posts list</h1>
+<table>
+    <div th:each="post : ${posts}">
+        <h2><a th:href="@{/posts/{postId}(postId=${post.id})}" th:text="${post.title}"></a></h2>
+        <div style="color: gray"><span th:text="${#temporals.format(post.created, 'yyyy-MM-dd HH:mm')}"></span></div>
+        <p><span th:text="${#strings.abbreviate(post.postAbstract, 50)}"></span></p>
+    </div>
+</table>
+</body>
+</html>

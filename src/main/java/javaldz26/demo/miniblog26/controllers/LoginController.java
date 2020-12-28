@@ -20,18 +20,18 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String showLoginForm(){
+    public String showLoginForm() {
         return "loginForm";
     }
 
     @PostMapping("/login-submit-data")
     public String submitLoginForm(@RequestParam String username,
-                                  @RequestParam String password){
+                                  @RequestParam String password) {
         try {
             loginService.loginUser(username, password);
         } catch (Exception e) {
             log.warn("Couldn't log user in: {}", e.getMessage(), e);
-          return "redirect:/login";
+            return "redirect:/login";
         }
 
         return "redirect:/";
@@ -41,5 +41,22 @@ public class LoginController {
     public String logoutUser() {
         loginService.logout();
         return "/redirect:/";
+    }
+
+    @GetMapping("/login-by-spring")
+    public String showLoginFormBySpring() {
+        return "loginForm";
+    }
+
+    @PostMapping("/login-by-spring-submit")
+    public String submitLoginFormBySpring(@RequestParam String username,
+                                          @RequestParam String password) {
+        try {
+            loginService.loginUser(username, password);
+        } catch (Exception e) {
+            log.warn("Couldn't log user in: {}", e.getMessage(), e);
+            return "redirect:/login";
+        }
+        return "redirect:/";
     }
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${'Miniblog - ' + postDetails.title}"> Miniblog - single-posts</title>
+</head>
+<body>
+<h1><span th:text="${postDetails.title}"></span></h1>
+<p style="color: gray">Added: <span th:text="${#temporals.format(postDetails.created, 'yyyy-MM-dd HH:mm')}"></span></p>
+<p><span th:text="${postDetails.postContent}"></span></p>
+
+<div>
+    <form th:action="@{/posts/{postId}/comment/add(postId=${postDetails.id})}" method="post">
+        Nickname: <input type="text" name="commentatorNickname">
+        <br>
+        Your comment: <textarea name="commentContent"></textarea>
+        <br>
+        <input type="submit" value="Add comment">
+    </form>
+</div>
+<h2>Comments:</h2>
+<div th:each="comment : ${post.comments}">
+        <h2><span th:text="${comment.nickname}">Nick</span></h2>
+        <p><span th:text="${comment.created}"></span></p>
+        <p><span th:text="${comment.commentContent}">Comment text...</span></p>
+</div>
+
+
+</body>
+</html>
